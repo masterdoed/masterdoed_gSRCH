@@ -33,8 +33,15 @@ def getURL(url):
 
 	return webobject
 
+def getLocalFile(file):
+	file = open(file, 'r', encoding="ISO-8859-1")
+	page=file.read()
+	webobject = BeautifulSoup(page, features="lxml")	
 
-def searchGoogle():
+	return webobject
+
+
+def searchGoogle(webobject):
 	base="https://www.google.de/search?&"
 	limiter="&num=100"
 	query="q=site%3Apastebin.*+%22gmx.de"
@@ -49,13 +56,13 @@ def searchGoogle():
 
 	#soup = BeautifulSoup(req.content, "lxml")
 	
-	webarchive="test2.html"
-	file = open(webarchive, 'r', encoding="ISO-8859-1")
-	page=file.read()
+	# webarchive="test2.html"
+	# file = open(webarchive, 'r', encoding="ISO-8859-1")
+	# page=file.read()
 
 	#soup = BeautifulSoup(req.content, "lxml")
-	soup = BeautifulSoup(page, features="lxml")
-	resultbody = soup.find('div', {'id': 'search'})
+	#soup = BeautifulSoup(page, features="lxml")
+	resultbody = webobject.find('div', {'id': 'search'})
 	
 	# parse resultbody and extract headings h3 and links to search results
 	resultList=[]
@@ -89,9 +96,9 @@ def parsePastebin(webobject):
 
 
 def main():
-	#print(json.dumps(searchGoogle(), indent=4))
-	getURL("https://pastebin.pl/view/08478ae1")
-	parsePastebin(getURL("https://pastebin.pl/view/08478ae1"))
+	print(json.dumps(searchGoogle(getLocalFile("test2.html")), indent=4))
+	#getURL("https://pastebin.pl/view/08478ae1")
+	#parsePastebin(getURL("https://pastebin.pl/view/08478ae1"))
 
 
 if __name__ == '__main__':
