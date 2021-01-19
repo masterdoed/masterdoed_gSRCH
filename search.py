@@ -40,28 +40,22 @@ def getLocalFile(file):
 
 	return webobject
 
-
-def searchGoogle(webobject):
+def createGoogleQuere():
 	base="https://www.google.de/search?&"
 	limiter="&num=100"
 	query="q=site%3Apastebin.*+%22gmx.de"
 	timer="&tbs=qdr:d"
 	url = base + query + limiter + timer
-	print(url)
+	
+	return url
+
+
+def searchGoogle(webobject):
+	
 
 	req="online search temporarily disabled -> local file mode"
 	print(req)
 
-	# temporarily work with local html webarchive test.webarchive
-
-	#soup = BeautifulSoup(req.content, "lxml")
-	
-	# webarchive="test2.html"
-	# file = open(webarchive, 'r', encoding="ISO-8859-1")
-	# page=file.read()
-
-	#soup = BeautifulSoup(req.content, "lxml")
-	#soup = BeautifulSoup(page, features="lxml")
 	resultbody = webobject.find('div', {'id': 'search'})
 	
 	# parse resultbody and extract headings h3 and links to search results
