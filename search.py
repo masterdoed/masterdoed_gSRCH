@@ -40,7 +40,7 @@ def getLocalFile(file):
 
 	return webobject
 
-def createGoogleQuere():
+def createGoogleQuery():
 	base="https://www.google.de/search?&"
 	limiter="&num=100"
 	query="q=site%3Apastebin.*+%22gmx.de"
